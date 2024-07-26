@@ -23,5 +23,10 @@ public class CartController {
             cartService.save(cart);
             return "Users added";
         }
+        @PutMapping
+    public String updateCart(@RequestBody Cart cart){
+            cartService.save(cart);
+            return "cart add";
+        }
 
     }

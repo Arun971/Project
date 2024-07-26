@@ -1,9 +1,11 @@
 package com.example.project1.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 
 @Entity
@@ -11,10 +13,17 @@ public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long productid;
-    private Long cartid;
     private LocalDate createdOn;
-   @ManyToOne()
+    @ManyToMany
+    @JoinTable(
+            name = "products_cartItem",
+            joinColumns = @JoinColumn(name = "cartItem_id"),
+            inverseJoinColumns = @JoinColumn(name = "products_id")
+    )
+    @JsonIgnoreProperties("cartItem")
+    private Set<Products> products;
+
+    @ManyToOne()
    @JoinColumn(name = "cart_id")
 
    private Cart cart;
@@ -29,21 +38,7 @@ public class CartItem {
         this.id = id;
     }
 
-    public Long getProductid() {
-        return productid;
-    }
 
-    public void setProductid(Long productid) {
-        this.productid = productid;
-    }
-
-    public Long getCartid() {
-        return cartid;
-    }
-
-    public void setCartid(Long cartid) {
-        this.cartid = cartid;
-    }
 
     public LocalDate getCreatedOn() {
         return createdOn;
@@ -51,5 +46,21 @@ public class CartItem {
 
     public void setCreatedOn(LocalDate createdOn) {
         this.createdOn = createdOn;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public Set<Products> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Products> products) {
+        this.products = products;
     }
 }

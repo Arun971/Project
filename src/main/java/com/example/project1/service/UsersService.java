@@ -25,4 +25,8 @@ public class UsersService {
         users.setStatus(true);
         return usersRepository.save(users);
     }
+    public String delete(long id){
+        usersRepository.deleteById(id);
+        return "delete ";
+    }
 }

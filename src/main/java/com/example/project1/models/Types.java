@@ -1,5 +1,5 @@
 package com.example.project1.models;
 
- enum Types {
+public enum Types {
     WORK,HOME;
 }

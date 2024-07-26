@@ -27,6 +27,11 @@ public class CategoryController {
         categoryService.save(category);
         return "Category create";
     }
+    @PutMapping
+    public String updateCategory(@RequestBody Category category){
+        categoryService.save(category);
+        return "category add";
+    }
 
 
 

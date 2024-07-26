@@ -2,11 +2,14 @@ package com.example.project1.models;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -26,10 +29,15 @@ public class Users {
     private Role role;
 
 @OneToMany(mappedBy = "users",cascade = CascadeType.ALL)
+@JsonManagedReference
+private List<Address> address;
+@OneToOne(cascade = CascadeType.ALL )
+@JoinColumn(name = "cart_id", referencedColumnName = "id")
+private Cart cart;
 
-private List<Address> addresses;
-
-
+    @ManyToMany(mappedBy = "user")
+    @JsonIgnoreProperties("user")
+    private Set<Orders> orders;
     public Long getId() {
         return id;
     }
@@ -100,5 +108,29 @@ private List<Address> addresses;
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public List<Address> getAddress() {
+        return address;
+    }
+
+    public void setAddress(List<Address> address) {
+        this.address = address;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public Set<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Orders> orders) {
+        this.orders = orders;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.project1.models;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -16,12 +17,8 @@ public class Category {
     private Boolean status;
 
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-
+@JsonManagedReference
     private List<Products> products ;
-
-
-
-
     public Long getId() {
         return id;
     }
@@ -52,5 +49,13 @@ public class Category {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public List<Products> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Products> products) {
+        this.products = products;
     }
 }

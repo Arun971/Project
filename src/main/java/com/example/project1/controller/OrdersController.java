@@ -26,6 +26,11 @@ public class OrdersController {
         ordersService.save(orders);
         return "order create";
     }
+    @PutMapping
+    public String updateOrders(@RequestBody Orders orders){
+        ordersService.save(orders);
+        return "orders add";
+    }
 
 
 }

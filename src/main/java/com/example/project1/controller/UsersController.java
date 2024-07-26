@@ -26,6 +26,18 @@ public class UsersController {
         usersService.save(users);
         return "Users added";
     }
+@PutMapping("/{id}")
+    public Users updateUsers(@PathVariable long id,@RequestBody Users users){
+        Optional<Users>users1= usersService.usersRepository.findById(id);
+        if (users1.isPresent()){
+            users1.get().setAddress(users.getAddress());
+        }
 
+        return usersService.save(users);
+}
+@DeleteMapping("/users/{id}")
+    public String deleteUsers(@PathVariable long id){
+        return usersService.delete(id);
+}
 
 }

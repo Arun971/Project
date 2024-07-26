@@ -19,7 +19,20 @@ public class AddressController {
         return addressService.findAll();
     }
     @PostMapping
-    public Address insetAdress(@RequestBody Address address){
-        return addressService.save(address);
+    public String  insetAddress(@RequestBody Address address){
+        addressService.save(address);
+        return "Address added";
     }
+
+    @PutMapping
+    public String updateAddress(@RequestBody Address address){
+       addressService.save(address);
+       return "address add";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteAddress(@PathVariable long id){
+        return addressService.delete(id);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.example.project1.controller;
 
 
+import com.example.project1.models.Orders;
 import com.example.project1.models.Products;
 
 import com.example.project1.service.ProductsService;
@@ -26,5 +27,10 @@ public class ProductsController {
     public String insertProducts(@RequestBody Products products) {
         productsService.save(products);
         return "Products create";
+    }
+    @PutMapping
+    public String updateProducts(@RequestBody Products products){
+        productsService.save(products);
+        return "Products add";
     }
 }

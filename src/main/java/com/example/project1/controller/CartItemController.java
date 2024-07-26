@@ -21,8 +21,12 @@ public class CartItemController {
     @PostMapping
     public String insertCartItem(@RequestBody CartItem cartItem){
          cartItemService.save(cartItem);
-         return "cart created";
+         return "cartItem created";
     }
-
+    @PutMapping
+    public String updateCartItem(@RequestBody CartItem cartItem){
+        cartItemService.save(cartItem);
+        return "cartitem add";
+    }
 
 }

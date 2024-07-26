@@ -4,6 +4,7 @@ package com.example.project1.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 public class Products {
@@ -16,6 +17,8 @@ public class Products {
     private Long stock;
     private LocalDate createdOn;
     private String image;
+    @ManyToMany(mappedBy = "products")
+    private Set<CartItem> cartItems;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -77,4 +80,19 @@ public class Products {
         this.image = image;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Set<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(Set<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
 }

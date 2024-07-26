@@ -1,42 +1,69 @@
 package com.example.project1.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
+
+
+import java.util.Set;
+
 @Entity
-public class Orders {
+public class  Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long userid;
-    private Long cartid;
+    private Long orderId;
 
+    @ManyToOne
+@JoinColumn(name = "cart_id",referencedColumnName = "id")
+@JsonBackReference
+private Cart cart;
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_orders",
+            joinColumns = @JoinColumn(name = "orders_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    @JsonIgnoreProperties("orders")
+    private Set<Users> user;
+    @ManyToMany
+    @JoinTable(
+            name = "address_orders",
+            joinColumns = @JoinColumn(name = "orders_id"),
+            inverseJoinColumns = @JoinColumn(name = "address_id")
+    )
+    @JsonIgnoreProperties("orders")
+    private Set<Address> address;
 
-
-
-    public Long getId() {
-        return id;
+    public Cart getCart() {
+        return cart;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
-    public Long getUserid() {
-        return userid;
+    public Set<Users> getUser() {
+        return user;
     }
 
-    public void setUserid(Long userid) {
-        this.userid = userid;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public Long getCartid() {
-        return cartid;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
-    public void setCartid(Long cartid) {
-        this.cartid = cartid;
+    public void setUser(Set<Users> user) {
+        this.user = user;
+    }
+
+    public Set<Address> getAddress() {
+        return address;
+    }
+
+    public void setAddress(Set<Address> address) {
+        this.address = address;
     }
 }

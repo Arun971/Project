@@ -20,4 +20,9 @@ public class AddressService {
     public Address save(Address address){
         return addressRepository.save(address);
     }
+
+    public String delete(long id){
+        addressRepository.deleteById(id);
+        return "delete ";
+    }
 }
